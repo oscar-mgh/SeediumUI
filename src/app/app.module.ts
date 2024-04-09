@@ -1,18 +1,38 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { MarkdownModule } from "ngx-markdown";
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { BlogDetailsComponent } from "./core/components/blog-details/blog-details.component";
+import { HomeComponent } from "./core/components/home/home.component";
+import { NavbarComponent } from "./core/components/navbar/navbar.component";
+import { AuthInterceptor } from "./core/interceptors/auth.interceptor";
+
+import { FeaturesModule } from "./features/features.module";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent,
+    HomeComponent,
+    BlogDetailsComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FeaturesModule,
+    HttpClientModule,
+    MarkdownModule.forRoot(),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

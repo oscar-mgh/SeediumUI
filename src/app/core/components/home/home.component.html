@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="my-3">
+    <div class="row align-items-stretch">
+      <ng-container *ngIf="blogs$ | async as blogs">
+        <div class="col-12 col-md-4 my-3" *ngFor="let blog of blogs">
+          <div class="card h-100 bg-dark-subtle">
+            <img
+              [src]="blog.featuredImageUrl"
+              [alt]="blog.title"
+              class="card-img-top"
+            />
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title fw-semibold">
+                {{ blog.title }}
+              </h5>
+              <p class="card-text mt-2">{{ blog.shortDescription }}</p>
+              <span class="d-flex align-items-end justify-content-end" style="flex: 1">
+                <a
+                  [routerLink]="['/blog/', blog.slug]"
+                  class="btn btn-sm btn-light fw-semibold"
+                >
+                  Read More
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- TODO  -->
+        <!-- <nav class="d-flex justify-content-center">
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+        </nav> -->
+      </ng-container>
+    </div>
+  </div>
+</div>

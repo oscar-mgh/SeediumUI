@@ -1,0 +1,81 @@
+<nav
+  class="navbar navbar-expand-lg bg-dark-subtle border-bottom border-1 border-body"
+  data-bs-theme="dark"
+>
+  <div class="container">
+    <a class="navbar-brand fw-bold brand">Seedium</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav fw-semibold me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">Home</a>
+        </li>
+        <ng-container
+          *ngIf="user !== undefined && user?.roles?.includes('Writer')"
+        >
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Admin
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" [routerLink]="['/admin/categories']"
+                  >Categories</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" [routerLink]="['/admin/blogposts']"
+                  >Blogposts</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ng-container>
+      </ul>
+
+      <div class="d-flex">
+        <ng-container *ngIf="!user; else showLogout">
+          <a [routerLink]="['auth/login']" class="btn btn-secondary btn-sm">
+            Login</a
+          >
+        </ng-container>
+
+        <ng-container *ngIf="!user">
+          <a [routerLink]="['auth/register']" class="btn btn-secondary btn-sm ms-3">
+            Register</a
+          >
+        </ng-container>
+
+        <ng-template #showLogout>
+          <div class="d-flex align-items-center">
+            <span>
+              {{ user?.email }}
+            </span>
+          </div>
+          <button
+            class="btn btn-secondary btn-sm ms-3"
+            (click)="onLogout()"
+          >
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+          </button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</nav>
