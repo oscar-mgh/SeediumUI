@@ -36,7 +36,7 @@ export class RegisterComponent {
   }
 
   onSubmit() {
-    this.authService.login(this.model).subscribe({
+    this.authService.register(this.model).subscribe({
       next: ({ email, roles, token }: RegisterResponse) => {
         this.cookieService.set(
           "Authorization",

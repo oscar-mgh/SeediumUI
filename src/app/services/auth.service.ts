@@ -7,6 +7,7 @@ import {
   LoginRequest,
   LoginResponse,
   RegisterRequest,
+  RegisterResponse,
   User,
 } from "../auth/models";
 
@@ -26,8 +27,8 @@ export class AuthService {
     return this.http.post<LoginResponse>(`${this.baseUrl}/auth/login`, request);
   }
 
-  register(request: RegisterRequest): Observable<void> {
-    return this.http.post<void>(`${this.baseUrl}/auth/register`, request);
+  register(request: RegisterRequest): Observable<RegisterResponse> {
+    return this.http.post<RegisterResponse>(`${this.baseUrl}/auth/register`, request);
   }
 
   setUser(user: User): void {
