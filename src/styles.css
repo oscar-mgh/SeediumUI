@@ -34,6 +34,10 @@ h6 {
   color: #18b6ff;
 }
 
+.brand:hover {
+  color: #18b6ff;
+}
+
 .show-password {
   cursor: pointer;
   color: #ffffff;
